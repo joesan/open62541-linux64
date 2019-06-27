@@ -7,7 +7,7 @@ services:
      ports:
         - "4840:4840"
      container_name: open62541_server
-     hostname: open62541-server
+     hostname: server
   client:
     build: ./client
     depends_on:
