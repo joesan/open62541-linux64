@@ -1,13 +1,9 @@
-#include <open62541/client_config_default.h>
-#include <open62541/client_highlevel.h>
-#include <open62541/plugin/log_stdout.h>
-
-#include <stdlib.h>
+#include <stdio.h>
+#include "open62541.h"
 
 int main(void) {
-    UA_Client *client = UA_Client_new();
-    UA_ClientConfig_setDefault(UA_Client_getConfig(client));
-    UA_StatusCode retval = UA_Client_connect(client, "opc.tcp://localhost:4840");
+    UA_Client *client = UA_Client_new(UA_ClientConfig_default);
+    UA_StatusCode retval = UA_Client_connect(client, "opc.tcp://open62541-server:4840");
     if(retval != UA_STATUSCODE_GOOD) {
         UA_Client_delete(client);
         return (int)retval;
@@ -31,7 +27,7 @@ int main(void) {
     }
 
     /* Clean up */
-    UA_Variant_clear(&value);
+    UA_Variant_deleteMembers(&value);
     UA_Client_delete(client); /* Disconnects the client internally */
-    return EXIT_SUCCESS;
+    return UA_STATUSCODE_GOOD;
 }

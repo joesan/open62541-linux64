@@ -2,11 +2,19 @@ version: '3'
 services:
   server:
      build: ./server
+     networks:
+        - common
      ports:
         - "4840:4840"
      container_name: open62541_server
+     hostname: open62541-server
   client:
     build: ./client
     depends_on:
        - server
     container_name: open62541_client
+    networks:
+        - common
+
+networks:
+    common:
