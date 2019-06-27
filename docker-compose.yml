@@ -1,0 +1,12 @@
+version: '3'
+services:
+  server:
+     build: ./server
+     ports:
+        - "4840:4840"
+     container_name: open62541_server
+  client:
+    build: ./client
+    depends_on:
+       - server
+    container_name: open62541_client
