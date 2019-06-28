@@ -6,13 +6,13 @@ services:
         - common
      ports:
         - "4840:4840"
-     container_name: open62541_server
-     hostname: server
+     container_name: open62541-server
+     hostname: open62541-server
   client:
     build: ./client
     depends_on:
        - server
-    container_name: open62541_client
+    container_name: open62541-client
     networks:
         - common
 
